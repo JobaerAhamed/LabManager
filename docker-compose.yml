@@ -1,0 +1,25 @@
+version: '3'
+services:
+  mongo:
+    container_name: lab-mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+  
+  labs:
+    links:
+      - mongo
+    build: .
+    volumes:
+      - ./:/app
+    working_dir: /app
+    environment:
+      WORKING_ENV: "dev"
+      MONGO_URI: "mongodb://mongo:27017/lab-mongo"
+      LOGGER_KEY: "123456"
+      habijabi: "asdhasghkdasgdgas"
+      PORT: 3000
+    ports:
+      - "8199:3000"
