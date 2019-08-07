@@ -27,6 +27,6 @@ Lab.post('/create', (req, res)=>{
         console.log(error)
         //res.send(error);   
     }
-})
+})  
 
 module.exports = Lab;

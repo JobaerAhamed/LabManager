@@ -10,7 +10,7 @@ class Database {
     }
     async connect (){
         try {
-            this.connection = await monogoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useCreateIndex: true });
+            this.connection = await monogoose.connect('mongodb://mkshuvo:iamshuvo123@ds044907.mlab.com:44907/labmanager', { useNewUrlParser: true, useCreateIndex: true });
             console.log("Connected to mongo DB")
             return this
         } catch (error) {
