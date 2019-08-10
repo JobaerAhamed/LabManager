@@ -5,7 +5,7 @@ const DB = require('./db/CoreDB');
 
 const app = express();
 
-const {auth, signup, lab, } = require('./api');
+const {auth, signup, lab, equips} = require('./api');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
