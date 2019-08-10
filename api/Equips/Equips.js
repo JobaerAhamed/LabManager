@@ -18,7 +18,7 @@ Equipment.get('/:equipment_name', (req, res)=>{
 })
 Equipment.post('/create', (req, res)=>{
     try {
-        Labs.create({
+        Equipments.create({
             equipment_id      : req.body.equipment_id,
             equipment_name    : req.body.equipment_name,
             equipment_quantity    : req.body.equipment_quantity
