@@ -31,32 +31,19 @@ Equipment.post('/create', (req, res)=>{
 Equipment.patch('/:equipment_id', (req, res)=>{
     if(req.params.equipment_id){
         var updatePayload = {
-            equipment_name:req.params.equipment_name,
-            equipment_quantity:req.params.equipment_quantity
+            equipment_name:req.body.equipment_name,
+            equipment_quantity:req.body.equipment_quantity
         }
-        Equipments.findAndModify({
-            query: { equipment_id: req.params.equipment_id },
-            update: { $set: { updatePayload } },
-            new: true
-        }, function (err, doc, lastErrorObject) {
-            if(err){
-            console.log(err);
-            }
-        })
+        Equipments.update(req.params.equipment_id,updatePayload).then(equipments=> res.json(equipments));
 
     }else {
     res.send('Please provide a valid lab name')
     }
 })
 
-Equipment.delete('/delete', (req, res)=>{
+Equipment.delete('/:equipment_id', (req, res)=>{
     try {
-        Equipments.remove(
-        {equipment_id      : req.body.equipment_id},(err,result)=>{
-            if(err){
-                console.log(err);
-            }
-        })
+        Equipments.remove(req.params.equipment_id).then(equipments=> res.json(equipments));
     } catch (error) {
         console.log(error)
         //res.send(error);   

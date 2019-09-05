@@ -66,6 +66,22 @@ class Equips{
             return error
         }
     }
+    async update(id='',updatePayload={}){
+        try{
+            const updateEquip = await this.model.findOneAndUpdate({equipment_id: id},updatePayload)
+            return updateEquip;
+        }catch(error){
+            console.log(error);
+        }
+    }
+    async remove(id=''){
+        try{
+           const deleteEquip = await this.model.findOneAndDelete({equipment_id : id})
+           return deleteEquip;
+        }catch(error){
+            console.log(error);
+        }
+    }
 }
 
 module.exports = new Equips;

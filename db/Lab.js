@@ -66,6 +66,22 @@ class Lab{
             return error
         }
     }
+    async update(id='',updatePayload={}){
+        try{
+            const updateLab = await this.model.findOneAndUpdate({lab_id: id},updatePayload)
+            return updateLab;
+        }catch(error){
+            console.log(error);
+        }
+    }
+    async remove(id=''){
+        try{
+           const deleteLab = await this.model.findOneAndDelete({lab_id : id})
+           return deleteLab;
+        }catch(error){
+            console.log(error);
+        }
+    }
 }
 
 module.exports = new Lab;

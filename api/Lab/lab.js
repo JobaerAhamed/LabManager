@@ -32,35 +32,22 @@ Lab.post('/create', (req, res)=>{
 Lab.patch('/:lab_id', (req, res)=>{
     if(req.params.lab_id){
         var updatePayload = {
-            lab_name:req.params.lab_name,
-            lab_dept:req.params.lab_dept
+            lab_name:req.body.lab_name,
+            lab_dept:req.body.lab_dept
         }
-        Labs.findAndModify({
-            query: { lab_id: req.params.lab_id },
-            update: { $set: { updatePayload } },
-            new: true
-        }, function (err, doc, lastErrorObject) {
-            if(err){
-            console.log(err);
-            }
-        })
+        Labs.update(req.params.lab_id,updatePayload).then(lab=> res.json(lab));
 
     }else {
-    res.send('Please provide a valid lab name')
+    res.send('Please provide a valid lab id')
     }
 })
 
 Lab.delete('/:lab_id', (req, res)=>{
     try {
-        Equipments.remove(
-        {lab_id: req.params.lab_id},(err,result)=>{
-            if(err){
-                console.log(err);
-            }
-        })
+        Equipments.remove(req.params.lab_id).then(lab=> res.json(lab));
     } catch (error) {
         console.log(error)
-        //res.send(error);   
+        //res.send(error);
     }
 })
 
