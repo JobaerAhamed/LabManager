@@ -58,9 +58,9 @@ class Lab{
         }
     }
 
-    async showOne(name=''){
+    async showOne(id=''){
         try {
-            const lab = await this.model.findOne({lab_name : name});
+            const lab = await this.model.findOne({lab_id : id});
             return lab;
         } catch (error) {
             return error
