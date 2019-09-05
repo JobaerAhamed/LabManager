@@ -58,9 +58,9 @@ class Equips{
         }
     }
 
-    async showOne(name=''){
+    async showOne(id=''){
         try {
-            const equip = await this.model.findOne({equipment_name : name});
+            const equip = await this.model.findOne({equipment_id : id});
             return equip;
         } catch (error) {
             return error

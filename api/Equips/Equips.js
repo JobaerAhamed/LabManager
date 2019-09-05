@@ -9,9 +9,9 @@ Equipment.get('/', (req, res)=>{
         //res.send(error);   
     }
 })
-Equipment.get('/:equipment_name', (req, res)=>{
-    if(req.params.equipment_name){
-        Equipments.showOne(req.params.equipment_name).then(equipments=>res.json(equipments));
+Equipment.get('/:equipment_id', (req, res)=>{
+    if(req.params.equipment_id){
+        Equipments.showOne(req.params.equipment_id).then(equipments=>res.json(equipments));
     } else {
         res.send('Please provide a valid lab name')
     }
