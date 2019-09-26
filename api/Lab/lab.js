@@ -9,9 +9,9 @@ Lab.get('/', (req, res)=>{
         //res.send(error);   
     }
 })
-Lab.get('/:lab_name', (req, res)=>{
-    if(req.params.lab_name){
-        Labs.showOne(req.params.lab_name).then(lab=>res.json(lab));
+Lab.get('/:id', (req, res)=>{
+    if(req.params.id){
+        Labs.showOne(req.params.id).then(lab=>res.json(lab));
     } else {
         res.send('Please provide a valid lab name')
     }
@@ -26,6 +26,28 @@ Lab.post('/create', (req, res)=>{
     } catch (error) {
         console.log(error)
         //res.send(error);   
+    }
+})
+
+Lab.patch('/:lab_id', (req, res)=>{
+    if(req.params.lab_id){
+        var updatePayload = {
+            lab_name:req.body.lab_name,
+            lab_dept:req.body.lab_dept
+        }
+        Labs.update(req.params.lab_id,updatePayload).then(lab=> res.json(lab));
+
+    }else {
+    res.send('Please provide a valid lab id')
+    }
+})
+
+Lab.delete('/:lab_id', (req, res)=>{
+    try {
+        Labs.remove(req.params.lab_id).then(res.send(`successfully deleted id: ${req.params.lab_id}`));
+    } catch (error) {
+        console.log(error)
+        //res.send(error);
     }
 })
 
