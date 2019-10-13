@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+require('./CoreDB')
 class Models {
     constructor(){
         this.schema

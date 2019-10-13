@@ -1,17 +1,23 @@
 const monogoose = require('mongoose')
 const Lab = require ('./Lab')
 
+const DB_URI = process.env.MONGO_URI || 'mongodb://mkshuvo:iamshuvo123@ds044907.mlab.com:44907/labmanager';
+
 class Database {
     constructor(){
         this.models = [Lab]
         this.extra
-        this.connection
+        this.connection = monogoose.connection
         this.operations
+        this.options = { 
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useFindAndModify: false }
     }
     async connect (){
         try {
-            this.connection = await monogoose.connect('mongodb://mkshuvo:iamshuvo123@ds044907.mlab.com:44907/labmanager', { useNewUrlParser: true, useCreateIndex: true });
-            console.log("Connected to mongo DB")
+            monogoose.connect(DB_URI, this.options);
+            console.log(`Connected to mongo DB : ${DB_URI}`)
             return this
         } catch (error) {
             console.log(error)
@@ -21,30 +27,7 @@ class Database {
 }
 
 const DB = new Database;
+
+
 DB.connect()
 module.exports = DB;
-
-
-
-    // async create(name, payload){
-    //     try {
-    //         this.models.filter(async model=>{
-    //             if (model.name == name){
-    //                 return await model.create(payload)
-    //             }
-    //         })
-    //     } catch (error) {
-    //         return error
-    //     }
-    // }
-    // setModel(name=''){
-    //     this.slectedModel = this.models.filter(model=> model.name === name)[0]
-    // }
-    // async showAll(){
-    //     try {
-    //         console.log(this.slectedModel.name)
-    //         return await this.slectedModel.showAll();
-    //     } catch (error) {
-    //         return error
-    //     }
-    // }

@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const shortid = require('shortid');
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
 const ModelClass = require('./ModelFactory')
@@ -28,6 +27,14 @@ class Equips{
                 index: true,
             },
             equipment_quantity: {
+                type: String,
+                required: true
+            },
+            equipment_extra_info: {
+                type: String,
+                required: true
+            },
+            current_status_id: {
                 type: String,
                 required: true
             },

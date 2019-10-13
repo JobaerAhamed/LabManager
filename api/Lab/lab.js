@@ -9,6 +9,7 @@ Lab.get('/', (req, res)=>{
         //res.send(error);   
     }
 })
+
 Lab.get('/:id', (req, res)=>{
     if(req.params.id){
         Labs.showOne(req.params.id).then(lab=>res.json(lab));
@@ -16,6 +17,7 @@ Lab.get('/:id', (req, res)=>{
         res.send('Please provide a valid lab name')
     }
 })
+
 Lab.post('/create', (req, res)=>{
     try {
         Labs.create({

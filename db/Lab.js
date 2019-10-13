@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const shortid = require('shortid');
 shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
 const ModelClass = require('./ModelFactory')
