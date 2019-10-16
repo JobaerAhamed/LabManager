@@ -36,14 +36,9 @@ User_r.post('/create', (req, res)=>{
 
 User_r.patch('/:lab_id', (req, res)=>{
     if(req.params.lab_id){
-        var updatePayload = {
-            lab_name:req.body.lab_name,
-            lab_dept:req.body.lab_dept
-        }
-        User.update(req.params.lab_id,updatePayload).then(User=> res.json(User));
-
+        User.update(req.params.lab_id,req.body).then(User=> res.json(User));
     }else {
-    res.send('Please provide a valid lab id')
+    res.send('Please provide a valid user id')
     }
 })
 
