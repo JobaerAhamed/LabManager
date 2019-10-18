@@ -1,13 +1,15 @@
 version: '3'
+volumes:
+  mongodata:
+    external: true
 services:
   mongo:
     container_name: lab-mongo
     image: mongo
     volumes:
-      - ./data:/data/db
+      - mongodata:/data/db
     ports:
       - "27017:27017"
-  
   labs:
     links:
       - mongo
