@@ -9,6 +9,9 @@ const {auth, signup, lab, equips, Status, User} = require('./api');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
+
 const port  = process.env.PORT || 3000;
 
 app.listen(port, ()=> console.log(`App started on : ${port}`));
@@ -24,3 +27,7 @@ app.use('/api/labs', lab);
 app.use('/api/equips', equips);
 app.use('/api/status', Status);
 app.use('/api/user', User);
+
+app.get('/home', (req, res) => {
+    res.render('index');
+})
