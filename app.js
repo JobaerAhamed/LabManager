@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const emoji = require('node-emoji');
 
-
 const app = express();
 
 const {auth, signup, lab, equips, Status, User} = require('./api');
@@ -25,24 +24,3 @@ app.use('/api/labs', lab);
 app.use('/api/equips', equips);
 app.use('/api/status', Status);
 app.use('/api/user', User);
-const express = require('express');
-const bodyParser = require('body-parser');
-const emoji = require('node-emoji');
-const DB = require('./db/CoreDB');
-
-const app = express();
-const PORT  = process.env.PORT || 3000;
-const {auth, signup, lab, } = require('./api');
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
-app.listen(PORT, ()=> console.log(`Running on : ${PORT}`));
-
-app.use('/api/signup', logOriginalUrl, signup);
-app.use('/api/labs', logOriginalUrl, lab);
-
-function logOriginalUrl (req, res, next) {
-    console.log(`${emoji.get('game_die')}    |    ${req.method}   |   ${req.headers.host}   |  ${req.originalUrl}   |   ${req.headers['user-agent']}`);
-    next()
-}
