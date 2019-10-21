@@ -31,3 +31,7 @@ app.use('/api/user', User);
 app.get('/home', (req, res) => {
     res.render('index');
 })
+
+app.get('/signup', (req, res) => {
+    res.render('signup/signup');
+})
