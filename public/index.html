@@ -56,15 +56,17 @@
                         <p class="hero-paragraph is-revealing">OP Template. Just Log in. Just do It. Its all Good. So safe, Very Trust</p>
                         <hr>
                         <div class="hero-form newsletter-form field field-grouped is-revealing">
-                            <div class="control control-expanded">
-                                <input class="input" type="email" name="email" placeholder="Username&hellip;">
-                            </div>
-                            <div class="control control-expanded">
-                                    <input class="input" type="email" name="email" placeholder="Password&hellip;">
+                            <form action="/login" method="POST">
+                                <div class="control control-expanded">
+                                    <input class="input" type="email" name="user_email" placeholder="Username&hellip;">
                                 </div>
-                            <div class="control">
-                                <a class="button button-primary button-block button-shadow" href="/home"> > </a>
-                            </div>
+                                <div class="control control-expanded">
+                                    <input class="input" type="password" name="user_pass" placeholder="Password&hellip;">
+                                </div>
+                                <div class="control">
+                                    <input class="button button-primary button-block button-shadow" type="submit" value=">">
+                                </div>
+                            </form>
                         </div>
                         <hr>
                         <div class="hero-browser">

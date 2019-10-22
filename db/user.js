@@ -92,6 +92,21 @@ class User{
             console.log(error);
         }
     }
+    async login(payload={}) {
+        let success = false
+        try {
+            let User = await this.model.findOne({user_email: payload.user_email});
+            if(User && payload.user_pass) {
+                success = await bcrypt.compare(payload.user_pass, User.user_pass);
+            }
+            User['success'] = success;
+            return success ? User : false;
+
+        } catch (error) {
+            console.log(error)
+            return false;
+        }
+    }
 }
 
 module.exports = new User;

@@ -27,7 +27,6 @@ class Database {
 }
 
 const DB = new Database;
-
-
 DB.connect()
+
 module.exports = DB;

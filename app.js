@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const emoji = require('node-emoji');
+const rp = require('request-promise');
 
 const app = express();
 
@@ -29,9 +30,35 @@ app.use('/api/status', Status);
 app.use('/api/user', User);
 
 app.get('/home', (req, res) => {
-    res.render('index');
+
+    res.render('index', {res});
 })
 
 app.get('/signup', (req, res) => {
     res.render('signup/signup');
+})
+
+app.post('/login', (req, res) => {
+    var options = {
+        method: 'POST',
+        uri: `http://${req.headers.host}/api/user/login`,
+        body: req.body,
+        json: true // Automatically stringifies the body to JSON
+    };
+    rp(options)
+        .then(function (result) {
+            if(result){
+                /**
+                 * This is where we will create our session
+                 */
+                res.redirect('/home')
+            } else {
+                console.log('Log in Failed')
+                res.redirect('/?error=login_failed')
+            }
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.redirect('/?error=login_failed')
+        });
 })

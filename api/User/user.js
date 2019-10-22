@@ -51,4 +51,13 @@ User_r.delete('/:lab_id', (req, res)=>{
     }
 })
 
+User_r.post('/login', (req, res)=>{
+    try {
+        User.login(req.body).then(user => res.json(user));
+    } catch (error) {
+        console.log(error)
+        res.send(error);
+    }
+})
+
 module.exports = User_r;

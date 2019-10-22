@@ -11,3 +11,8 @@
     3. `127.0.0.1:8199/api` will be our hidden api route. [ULTRA PROTECTED]
 
     We will build up the routes and views accordingly
+
+
+## TODO
+    1. Organize the landing page [Allign Login + Create Sign UP section & route]
+    2. Hard code Admin Panel
