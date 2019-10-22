@@ -1,6 +1,7 @@
 const shortid = require('shortid');
 shortid.characters('$@0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 const ModelClass = require('./ModelFactory')
+const bcrypt = require('bcrypt')
 
 class User{
     constructor(user_id = '', user_name = ''){
@@ -51,6 +52,7 @@ class User{
     }
     async create(payload={}){
         try {
+            payload.user_pass = await bcrypt.hash(payload.user_pass, 10);
             const newUser = new this.model(payload)
             const User = await newUser.save();
             return User

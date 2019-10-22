@@ -2,7 +2,7 @@ FROM node:10.15.1
 RUN mkdir /app
 WORKDIR /app
 ADD . /app
-COPY package*.json ./
+COPY package.json ./
 RUN npm install
 COPY . .
 EXPOSE 8080
