@@ -5,7 +5,7 @@ const rp = require('request-promise');
 
 const app = express();
 
-const {auth, signup, lab, equips, Status, User} = require('./api');
+const { auth, signup, lab, equips, Status, User } = require('./api');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -13,11 +13,11 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-const port  = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-app.listen(port, ()=> console.log(`App started on : ${port}`));
+app.listen(port, () => console.log(`App started on : ${port}`));
 
-function logOriginalUrl (req, res, next) {
+function logOriginalUrl(req, res, next) {
     console.info(`${emoji.get('game_die')}    |    ${req.method}   |   ${req.headers.host}   |  ${req.originalUrl}   |   ${req.headers['user-agent']}`);
     next()
 }
@@ -31,11 +31,31 @@ app.use('/api/user', User);
 
 app.get('/home', (req, res) => {
 
-    res.render('index', {res});
+    res.render('index', { res });
 })
 
-app.get('/signup', (req, res) => {
-    res.render('signup/signup');
+app.post('/signup', (req, res) => {
+
+    var options = {
+        method: 'POST',
+        uri: `http://${req.headers.host}/api/user/create`,
+        body: req.body,
+        json: true
+    };
+    rp(options)
+        .then(function (result) {
+            if (result) {
+                res.redirect('/home')
+            } else {
+                console.log('Signup Failed')
+                res.redirect('/?error=signup_failed')
+            }
+        })
+        .catch(function (err) {
+            // this is gotta be some validation error here. :p sorry XD
+            console.log(err);
+            res.redirect('/?error=signup_failed')
+        });
 })
 
 app.post('/login', (req, res) => {
@@ -47,7 +67,7 @@ app.post('/login', (req, res) => {
     };
     rp(options)
         .then(function (result) {
-            if(result){
+            if (result) {
                 /**
                  * This is where we will create our session
                  */

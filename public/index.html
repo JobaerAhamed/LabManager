@@ -55,8 +55,8 @@
                         <h1 class="hero-title h2-mobile mt-0 is-revealing">Welcome To Lab Manager</h1>
                         <p class="hero-paragraph is-revealing">OP Template. Just Log in. Just do It. Its all Good. So safe, Very Trust</p>
                         <hr>
-                        <div class="hero-form newsletter-form field field-grouped is-revealing">
-                            <form action="/login" method="POST">
+                        <!-- <div class="hero-form newsletter-form field field-grouped is-revealing"> -->
+                            <form class="hero-form newsletter-form field field-grouped is-revealing" action="/login" method="POST">
                                 <div class="control control-expanded">
                                     <input class="input" type="email" name="user_email" placeholder="Username&hellip;">
                                 </div>
@@ -67,7 +67,7 @@
                                     <input class="button button-primary button-block button-shadow" type="submit" value=">">
                                 </div>
                             </form>
-                        </div>
+                        <!-- </div> -->
                         <hr>
                         <div class="hero-browser">
                             <div class="bubble-3 is-revealing">
@@ -258,16 +258,51 @@
                 <div class="container-sm">
                     <div class="newsletter-inner section-inner">
                         <div class="newsletter-header text-center is-revealing">
-                            <h2 class="section-title mt-0">Stay Connected</h2>
-                            <p class="section-paragraph">Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation</p>
+                            <h2 class="section-title mt-0">Sign up now</h2>
+                            <!-- <p class="section-paragraph">Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation</p> -->
                         </div>
                         <div class="footer-form newsletter-form field field-grouped is-revealing">
-                            <div class="control control-expanded">
+                            <!-- <div class="control control-expanded">
                                 <input class="input" type="email" name="email" placeholder="Your best email&hellip;">
                             </div>
                             <div class="control">
                                 <a class="button button-primary button-block button-shadow" href="#">Get early access</a>
-                            </div>
+                            </div> -->
+                            <form class="hero-form newsletter-form field is-revealing" action="/signup" method="POST">
+                                <div class="control control-expanded">
+                                    <input class="input signup_input" style="width: 304px !important;" type="text" name="user_id" placeholder="User ID&hellip;">
+                                </div>
+                                <br/>
+                                <div class="control control-expanded">
+                                    <input class="input signup_input" style="width: 304px !important;" type="text" name="user_name" placeholder="Full Name&hellip;">
+                                </div>
+                                <br/>
+                                <div class="control control-expanded">
+                                    <input class="input signup_input" style="width: 304px !important;" type="text" name="user_dept" placeholder="Department&hellip;">
+                                </div>
+                                <br/>
+                                <div class="control control-expanded">
+                                    <!-- <input class="input" type="text" name="user_role" placeholder="Role&hellip;"> -->
+                                    <select name="user_role" class="input signup_input" style="width: 304px !important;">
+                                        <option value="Student">Student</option>
+                                        <option value="Teacher">Teacher</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                </div>
+                                <br/>
+                                <div class="control control-expanded">
+                                    <input class="input signup_input" style="width: 304px !important;" type="email" name="user_email" placeholder="Username&hellip;">
+                                </div>
+                                <br/>
+                                <div class="control control-expanded">
+                                    <input class="input signup_input" style="width: 304px !important;" type="password" name="user_pass" placeholder="Password&hellip;">
+                                </div>
+                                <br/>
+                                <div class="control">
+                                    <input class="button button-primary button-block button-shadow" style="width: 304px !important;" type="submit" value="signup">
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>
