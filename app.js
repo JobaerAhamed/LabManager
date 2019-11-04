@@ -101,14 +101,16 @@ app.post('/signup', (req, res) => {
             res.redirect('/?error=signup_failed')
         });
 })
+
 app.post('/login', (req, res, next) => {
     passport.authenticate('local', {
       successRedirect: '/home',
-      failureRedirect: '/',
+      failureRedirect: '/#login',
     })(req, res, next);
 });
 app.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/')
 })
-app.get('/login', (req, res, next)=>res.redirect('/'))
+app.get('/signup', (req, res, next)=>res.redirect('/#signup'))
+app.get('/login', (req, res, next)=>res.redirect('/#login'))
