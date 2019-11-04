@@ -6,13 +6,19 @@ const app = express();
 const session = require('express-session')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const RedisStore = require('connect-redis')(session)
+const {redis_client, getAsync, setAsync, keysAsync} = require('./redis')
+
 const { auth, signup, lab, equips, Status, User } = require('./api');
 const Users = require('./db/user')
+
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 /*********************************************/
 app.use(session({
+    store: new RedisStore({ client: redis_client }),
     secret: 'secret',
     resave: true,
     saveUninitialized: true
@@ -22,28 +28,24 @@ app.use(passport.initialize())
 app.use(passport.session())
 passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done)=>{
-        console.log({user_email: email, user_pass: password})
         Users.login({user_email: email, user_pass: password})
             .then(user=>{
-                console.log(user)
                 if (user) { return done(null, user) }
                 else {return done(null, false)}
             })
             .catch(error =>{
-                console.log(error)
                 return done(error)
             })
     })
 );
 passport.serializeUser(function(user, done) {
-    console.log('serializeUser')
-    done(null, user._id);
+    setAsync(user._id, JSON.stringify(user)).then(data=>done(null, user))
 });
 passport.deserializeUser(function(id, done) {
-    console.log('deserializeUser')
-    Users.model.findById(id, function(err, user) {
-      done(err, user);
-    });
+    getAsync(id._id).then(data=>{
+        let user = JSON.parse(data)
+        done(null, user)
+    })
 });
 
 /*********************************************/
@@ -51,7 +53,7 @@ passport.deserializeUser(function(id, done) {
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`App started on : ${port}`));
 
 function logOriginalUrl(req, res, next) {
@@ -74,8 +76,6 @@ app.use('/api/user', User);
 
 
 app.get('/home', auth, (req, res) => {
-    console.log(req.isAuthenticated())
-
     res.render('index', { res });
 })
 app.post('/signup', (req, res) => {
@@ -95,11 +95,11 @@ app.post('/signup', (req, res) => {
                 res.redirect('/?error=signup_failed')
             }
         })
-        // .catch(function (err) {
-        //     // this is gotta be some validation error here. :p sorry XD
-        //     console.log('Signup Failed');
-        //     res.redirect('/?error=signup_failed')
-        // });
+        .catch(function (err) {
+            // this is gotta be some validation error here. :p sorry XD
+            console.log('Signup Failed', err);
+            res.redirect('/?error=signup_failed')
+        });
 })
 app.post('/login', (req, res, next) => {
     passport.authenticate('local', {

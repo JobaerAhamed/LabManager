@@ -30,7 +30,7 @@ User_r.post('/create', (req, res)=>{
         }).then(User => res.json(User));
     } catch (error) {
         console.log(error)
-        //res.send(error);   
+        res.send(error);   
     }
 })
 

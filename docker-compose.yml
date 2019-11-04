@@ -10,9 +10,18 @@ services:
       - mongodata:/data/db
     ports:
       - "27017:27017"
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+    command: ["redis-server"]
+    hostname: redis
   labs:
+    container_name: labs
     links:
       - mongo
+      - redis
     build: .
     volumes:
       - ./:/app
@@ -22,7 +31,8 @@ services:
       WORKING_ENV: "dev"
       MONGO_URI: "mongodb://mongo:27017/lab-mongo"
       LOGGER_KEY: "123456"
+      REDIS_URL: "redis://cache"
       habijabi: "asdhasghkdasgdgas"
-      PORT: 3000
+      PORT: 8080
     ports:
-      - "8199:3000"
+      - "8080:8080"
