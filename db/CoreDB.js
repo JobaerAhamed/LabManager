@@ -1,11 +1,11 @@
 const monogoose = require('mongoose')
-const Lab = require ('./Lab')
+// const Lab = require ('./Lab')
 
 const DB_URI = process.env.MONGO_URI || 'mongodb://mkshuvo:iamshuvo123@ds044907.mlab.com:44907/labmanager';
 
 class Database {
     constructor(){
-        this.models = [Lab]
+        this.models = []
         this.extra
         this.connection = monogoose.connection
         this.operations
