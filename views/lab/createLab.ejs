@@ -1,0 +1,56 @@
+<% include ./../common/header %>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Edit Profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <!-- Lab Id -->
+                            <div class="row">
+                                <div class="col-md-12 pr-1">
+                                    <div class="form-group">
+                                        <label>Lab Id</label>
+                                        <input type="text" name="lab_id" class="form-control" placeholder="Lab ID"
+                                            value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- lab_name -->
+                            <div class="row">
+                                <div class="col-md-12 pr-1">
+                                    <div class="form-group">
+                                        <label>Lab Name</label>
+                                        <input type="text" name="lab_name" class="form-control" placeholder="lab name"
+                                            value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- lab_dept -->
+                            <div class="row">
+                                <div class="col-md-12 pr-1">
+                                    <div class="form-group">
+                                        <label>Lab Dept</label>
+                                        <input type="text" name="lab_dept" class="form-control" placeholder="lab dept"
+                                            value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-info btn-fill pull-right">
+                                Update Profile
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% include ./../common/footer %>
